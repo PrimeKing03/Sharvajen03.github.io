@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sujitharan Sharvajan | Network & Security Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #1a1a24;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dim: rgba(201,168,76,0.15);
+    --text: #e8e6df;
+    --text-dim: #8a8880;
+    --accent: #4ca8c9;
+    --border: rgba(201,168,76,0.2);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content:'';
+    position:fixed;
+    inset:0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events:none;
+    z-index:9999;
+    opacity:0.5;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top:0; width:100%; z-index:100;
+    display:flex; justify-content:space-between; align-items:center;
+    padding: 1.2rem 4rem;
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    background: rgba(10,10,15,0.85);
+  }
+  .nav-logo {
+    font-family: 'Space Mono', monospace;
+    font-size:.85rem;
+    color: var(--gold);
+    letter-spacing:.15em;
+  }
+  .nav-links { display:flex; gap:2rem; list-style:none; }
+  .nav-links a {
+    font-size:.8rem; letter-spacing:.1em; text-transform:uppercase;
+    color: var(--text-dim); text-decoration:none;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 7rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .hero-tag {
+    font-family: 'Space Mono', monospace;
+    font-size:.75rem; color: var(--gold);
+    letter-spacing:.2em; text-transform:uppercase;
+    margin-bottom: 1.5rem;
+    display:flex; align-items:center; gap:.75rem;
+  }
+  .hero-tag::before { content:''; width:30px; height:1px; background:var(--gold); display:inline-block; }
+  h1 {
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing:-.02em;
+    margin-bottom: 1.5rem;
+  }
+  h1 span { color: var(--gold); display:block; }
+  .hero-sub {
+    color: var(--text-dim);
+    font-size:1rem; line-height:1.7;
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-cta { display:flex; gap:1rem; flex-wrap:wrap; }
+  .btn {
+    padding: .75rem 1.8rem;
+    font-family: 'Space Mono', monospace;
+    font-size:.8rem; letter-spacing:.1em; text-transform:uppercase;
+    text-decoration:none; cursor:pointer; border:none;
+    transition: all .25s;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--bg);
+    font-weight:700;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform:translateY(-2px); }
+  .btn-ghost {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* Hero right — stat card */
+  .hero-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2.5rem;
+    position: relative;
+  }
+  .hero-card::before {
+    content:'';
+    position:absolute; top:0; left:0; right:0; height:3px;
+    background: linear-gradient(90deg, var(--gold), var(--accent));
+  }
+  .card-label {
+    font-family:'Space Mono',monospace;
+    font-size:.7rem; color:var(--gold); letter-spacing:.2em;
+    text-transform:uppercase; margin-bottom:1.5rem;
+  }
+  .stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+  .stat { border-left:2px solid var(--border); padding-left:1rem; }
+  .stat-num { font-size:2rem; font-weight:800; color:var(--gold); line-height:1; }
+  .stat-label { font-size:.75rem; color:var(--text-dim); margin-top:.25rem; }
+  .contact-links { margin-top:2rem; display:flex; flex-direction:column; gap:.6rem; }
+  .contact-item {
+    display:flex; align-items:center; gap:.75rem;
+    font-family:'Space Mono',monospace; font-size:.75rem; color:var(--text-dim);
+  }
+  .contact-dot { width:6px; height:6px; border-radius:50%; background:var(--gold); flex-shrink:0; }
+
+  /* ── BG DECOR ── */
+  .hero-bg {
+    position:absolute; right:-200px; top:50%; transform:translateY(-50%);
+    width:700px; height:700px; border-radius:50%;
+    background: radial-gradient(circle, rgba(201,168,76,.06) 0%, transparent 70%);
+    pointer-events:none;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 4rem; }
+  .section-inner { max-width:1200px; margin:0 auto; }
+  .section-header { margin-bottom:3rem; }
+  .section-tag {
+    font-family:'Space Mono',monospace;
+    font-size:.7rem; color:var(--gold); letter-spacing:.2em;
+    text-transform:uppercase; margin-bottom:.75rem;
+    display:flex; align-items:center; gap:.5rem;
+  }
+  .section-tag::before { content:''; width:20px; height:1px; background:var(--gold); }
+  h2 { font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight:800; letter-spacing:-.02em; }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--surface); }
+  .exp-item {
+    display:grid; grid-template-columns: 200px 1fr;
+    gap: 3rem; padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .exp-item:last-child { border-bottom:none; }
+  .exp-meta { }
+  .exp-date {
+    font-family:'Space Mono',monospace;
+    font-size:.75rem; color:var(--gold); margin-bottom:.5rem;
+  }
+  .exp-company { font-size:.85rem; color:var(--text-dim); line-height:1.5; }
+  .exp-title { font-size:1.3rem; font-weight:700; margin-bottom:.5rem; }
+  .exp-loc { font-family:'Space Mono',monospace; font-size:.7rem; color:var(--text-dim); margin-bottom:1rem; }
+  .exp-points { list-style:none; display:flex; flex-direction:column; gap:.5rem; }
+  .exp-points li {
+    padding-left:1.2rem; position:relative;
+    font-size:.9rem; color:var(--text-dim); line-height:1.6;
+  }
+  .exp-points li::before {
+    content:'→'; position:absolute; left:0; color:var(--gold); font-size:.8rem;
+  }
+
+  /* ── PROJECTS ── */
+  .proj-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(340px, 1fr)); gap:1.5rem; }
+  .proj-card {
+    background:var(--surface);
+    border:1px solid var(--border);
+    padding:2rem;
+    position:relative;
+    transition: border-color .25s, transform .25s;
+    overflow:hidden;
+  }
+  .proj-card::after {
+    content:'';
+    position:absolute; bottom:0; left:0; right:0; height:2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    transform: scaleX(0); transform-origin:left;
+    transition: transform .3s;
+  }
+  .proj-card:hover { border-color:rgba(201,168,76,.5); transform:translateY(-4px); }
+  .proj-card:hover::after { transform:scaleX(1); }
+  .proj-year {
+    font-family:'Space Mono',monospace;
+    font-size:.7rem; color:var(--gold); margin-bottom:.75rem;
+  }
+  .proj-name { font-size:1.05rem; font-weight:700; margin-bottom:.75rem; line-height:1.3; }
+  .proj-desc { font-size:.85rem; color:var(--text-dim); line-height:1.65; margin-bottom:1rem; }
+  .proj-tags { display:flex; flex-wrap:wrap; gap:.4rem; }
+  .tag {
+    font-family:'Space Mono',monospace;
+    font-size:.65rem; padding:.25rem .6rem;
+    background:var(--gold-dim); border:1px solid var(--border);
+    color:var(--gold); letter-spacing:.05em;
+  }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--surface); }
+  .skills-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:2rem; }
+  .skill-group { }
+  .skill-group-title {
+    font-family:'Space Mono',monospace;
+    font-size:.7rem; color:var(--gold); letter-spacing:.15em;
+    text-transform:uppercase; margin-bottom:1rem;
+    padding-bottom:.5rem; border-bottom:1px solid var(--border);
+  }
+  .skill-list { display:flex; flex-wrap:wrap; gap:.5rem; }
+  .skill-pill {
+    font-size:.8rem; padding:.35rem .85rem;
+    background:var(--surface2); border:1px solid var(--border);
+    color:var(--text-dim);
+    transition: all .2s;
+  }
+  .skill-pill:hover { border-color:var(--gold); color:var(--gold); }
+
+  /* ── CERTS ── */
+  .cert-list { display:flex; flex-direction:column; gap:1rem; }
+  .cert-item {
+    display:flex; align-items:center; gap:1rem;
+    padding:1.25rem 1.5rem;
+    background:var(--surface);
+    border:1px solid var(--border);
+    transition: border-color .2s;
+  }
+  .cert-item:hover { border-color:var(--gold); }
+  .cert-icon {
+    width:36px; height:36px; border-radius:50%;
+    background:var(--gold-dim); border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+    font-size:.75rem; color:var(--gold); flex-shrink:0;
+    font-family:'Space Mono',monospace;
+  }
+  .cert-name { font-size:.9rem; font-weight:600; }
+  .cert-by { font-family:'Space Mono',monospace; font-size:.7rem; color:var(--text-dim); margin-top:.15rem; }
+
+  /* ── EDUCATION ── */
+  .edu-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+  .edu-card {
+    background:var(--surface);
+    border:1px solid var(--border);
+    padding:2rem;
+  }
+  .edu-card .edu-year {
+    font-family:'Space Mono',monospace;
+    font-size:.7rem; color:var(--gold); margin-bottom:.75rem;
+  }
+  .edu-degree { font-size:1rem; font-weight:700; margin-bottom:.4rem; }
+  .edu-school { font-size:.85rem; color:var(--text-dim); }
+  .edu-cgpa {
+    margin-top:.75rem;
+    font-family:'Space Mono',monospace;
+    font-size:.75rem; color:var(--accent);
+  }
+
+  /* ── CONTACT ── */
+  #contact { background:var(--surface); text-align:center; }
+  .contact-grid {
+    display:flex; justify-content:center; gap:1.5rem;
+    flex-wrap:wrap; margin-top:2.5rem;
+  }
+  .contact-card {
+    background:var(--bg);
+    border:1px solid var(--border);
+    padding:1.5rem 2rem;
+    min-width:200px;
+    transition: border-color .2s, transform .2s;
+  }
+  .contact-card:hover { border-color:var(--gold); transform:translateY(-3px); }
+  .contact-card a { color:var(--text); text-decoration:none; }
+  .contact-card-label {
+    font-family:'Space Mono',monospace;
+    font-size:.65rem; color:var(--gold); letter-spacing:.15em;
+    text-transform:uppercase; margin-bottom:.5rem;
+  }
+  .contact-card-val { font-size:.9rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding:2rem 4rem;
+    border-top:1px solid var(--border);
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:'Space Mono',monospace; font-size:.7rem; color:var(--text-dim);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(24px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  .fade-up { animation: fadeUp .7s ease both; }
+  .fade-up:nth-child(2) { animation-delay:.15s; }
+  .fade-up:nth-child(3) { animation-delay:.3s; }
+  .fade-up:nth-child(4) { animation-delay:.45s; }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:900px) {
+    nav { padding:1rem 1.5rem; }
+    .nav-links { display:none; }
+    section, #hero { padding:4rem 1.5rem; }
+    .hero-grid, .edu-grid { grid-template-columns:1fr; }
+    .exp-item { grid-template-columns:1fr; gap:1rem; }
+    footer { flex-direction:column; gap:.5rem; text-align:center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">S_SHARVAJAN // NET&amp;SEC</div>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid section-inner">
+    <div>
+      <div class="hero-tag fade-up">Network &amp; Security Engineer</div>
+      <h1 class="fade-up">Sujitharan<span>Sharvajan</span></h1>
+      <p class="hero-sub fade-up">
+        Computer Systems &amp; Networking Engineering student at SLIIT, working hands-on with enterprise-grade network infrastructure — FortiGate, HPE/Aruba, Huawei, SD-WAN, and beyond.
+      </p>
+      <div class="hero-cta fade-up">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#contact" class="btn btn-ghost">Get In Touch</a>
+      </div>
+    </div>
+    <div class="hero-card fade-up">
+      <div class="card-label">// quick stats</div>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-num">3.02</div>
+          <div class="stat-label">CGPA — Year 4 Sem 1</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">8+</div>
+          <div class="stat-label">Certifications</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">5+</div>
+          <div class="stat-label">Enterprise Projects</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">1yr+</div>
+          <div class="stat-label">Industry Experience</div>
+        </div>
+      </div>
+      <div class="contact-links">
+        <div class="contact-item"><span class="contact-dot"></span>sharvajen1130@gmail.com</div>
+        <div class="contact-item"><span class="contact-dot"></span>+94 755 598 777</div>
+        <div class="contact-item"><span class="contact-dot"></span>github.com/Sharvajen03</div>
+        <div class="contact-item"><span class="contact-dot"></span>linkedin.com/in/Sharvajen Sujitharan</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">Work History</div>
+      <h2>Experience</h2>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">2024 – Present</div>
+        <div class="exp-company">DMS Electronics (Pvt) Limited<br>207/1, Dharmapala Mawatha, Colombo 00700</div>
+      </div>
+      <div>
+        <div class="exp-title">Associate Network &amp; Security Engineer</div>
+        <div class="exp-loc">// Colombo, Sri Lanka</div>
+        <ul class="exp-points">
+          <li>Configured and managed HPE/Aruba switches, Access Points, Citrix load balancers (VPX, MPX, SDX), FortiGate &amp; Sophos firewalls, and Huawei switches (Cloud Engine, Ekit, Air Engine, iMaster).</li>
+          <li>Performed advanced configurations: SASE, SD-WAN, and FortiClient on FortiGate firewalls.</li>
+          <li>Set up and optimized Aruba Access Points for reliable wireless connectivity.</li>
+          <li>Configured SSH, DHCP, VLANs, Inter-VLAN routing, ACLs, and port security.</li>
+          <li>Provided consulting on HPE/Aruba products; managed warranty replacements and firmware updates.</li>
+          <li>Configured Huawei iMaster, VRP, IStack, AP Mesh, STelnet, M-LAG, CSS.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">What I've Built</div>
+      <h2>Projects</h2>
+    </div>
+    <div class="proj-grid">
+
+      <div class="proj-card">
+        <div class="proj-year">2025</div>
+        <div class="proj-name">Enterprise Network Design &amp; Implementation</div>
+        <div class="proj-desc">Spine-and-leaf architecture with 2 HPE 5520 core switches (IRF), 4 distribution switches, 35 access switches, 30 Aruba APs, RADIUS auth, FortiGate 80F SD-WAN, and Zabbix monitoring.</div>
+        <div class="proj-tags">
+          <span class="tag">HPE 5520</span><span class="tag">FortiGate 80F</span>
+          <span class="tag">SD-WAN</span><span class="tag">Zabbix</span><span class="tag">IRF</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-year">2025</div>
+        <div class="proj-name">Disaster Recovery Site — 8x Aruba CX 6300M</div>
+        <div class="proj-desc">DR site network with VSF ring topology stacking, VLANs, Layer 2/3 LACP, ACLs, STP, BPDU, and SNMP for real-time monitoring across all switches.</div>
+        <div class="proj-tags">
+          <span class="tag">Aruba CX 6300M</span><span class="tag">VSF</span>
+          <span class="tag">LACP</span><span class="tag">SNMP</span><span class="tag">ACL</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-year">2025</div>
+        <div class="proj-name">Centralized Network Monitoring — Zabbix</div>
+        <div class="proj-desc">Deployed Zabbix on Ubuntu Server; integrated HPE OfficeConnect 1920s and Aruba CX 6200 via SNMP v2. Automated alerting for proactive fault detection and performance tracking.</div>
+        <div class="proj-tags">
+          <span class="tag">Zabbix</span><span class="tag">Ubuntu</span>
+          <span class="tag">SNMP v2</span><span class="tag">HPE</span><span class="tag">Aruba CX</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-year">2025</div>
+        <div class="proj-name">Enterprise Network — Huawei iMaster NCE</div>
+        <div class="proj-desc">Large enterprise network deployment with Huawei switches and APs fully managed via iMaster NCE Cloud. Configured guest Wi-Fi (token-based), RADIUS SSID auth, and mesh AP bridging (MPP/MP).</div>
+        <div class="proj-tags">
+          <span class="tag">Huawei iMaster</span><span class="tag">RADIUS</span>
+          <span class="tag">AP Mesh</span><span class="tag">Wi-Fi</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-year">2024</div>
+        <div class="proj-name">Hospital Network Monitoring — Zabbix &amp; HPE</div>
+        <div class="proj-desc">Deployed Zabbix on Ubuntu to monitor hospital HPE switches (1920S, 5510, 5520) via SNMP. Dashboard tracking CPU, memory, uptime, and interfaces. Planned SNMPv3 and IRF stacking enhancements.</div>
+        <div class="proj-tags">
+          <span class="tag">Zabbix</span><span class="tag">HPE Switches</span>
+          <span class="tag">SNMP</span><span class="tag">Ubuntu</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-year">2024</div>
+        <div class="proj-name">Nagios &amp; DNS Caching — CentOS / Fedora Lab</div>
+        <div class="proj-desc">Nagios monitoring system for CentOS server and Fedora clients. DNS caching setup between CentOS and Fedora to optimize resolution, reduce traffic, and enhance reliability.</div>
+        <div class="proj-tags">
+          <span class="tag">Nagios</span><span class="tag">CentOS 7</span>
+          <span class="tag">Fedora</span><span class="tag">DNS</span><span class="tag">VMware</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">Technical Expertise</div>
+      <h2>Skills</h2>
+    </div>
+    <div class="skills-grid">
+
+      <div class="skill-group">
+        <div class="skill-group-title">// Networking</div>
+        <div class="skill-list">
+          <span class="skill-pill">CCNA Routing &amp; Switching</span>
+          <span class="skill-pill">VLANs / Inter-VLAN</span>
+          <span class="skill-pill">OSPF</span>
+          <span class="skill-pill">SNMP / ZABBIX</span>
+          <span class="skill-pill">DHCP / DNS</span>
+          <span class="skill-pill">SSH / FTP / HTTPS</span>
+          <span class="skill-pill">ACLs</span>
+          <span class="skill-pill">STP / BPDU</span>
+          <span class="skill-pill">LACP</span>
+          <span class="skill-pill">Network Socket Programming</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">// Vendors &amp; Platforms</div>
+        <div class="skill-list">
+          <span class="skill-pill">HPE Network / Aruba</span>
+          <span class="skill-pill">Aruba CX OS</span>
+          <span class="skill-pill">Comware 5/7</span>
+          <span class="skill-pill">Huawei iMaster NCE</span>
+          <span class="skill-pill">FortiGate (SD-WAN, SASE)</span>
+          <span class="skill-pill">Citrix SDX NetScaler</span>
+          <span class="skill-pill">Aruba ClearPass</span>
+          <span class="skill-pill">Aruba AirWave</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">// Systems &amp; Cloud</div>
+        <div class="skill-list">
+          <span class="skill-pill">Linux (CentOS, Ubuntu, Fedora, Rocky)</span>
+          <span class="skill-pill">Red Hat Enterprise Linux</span>
+          <span class="skill-pill">AWS Cloud</span>
+          <span class="skill-pill">VMware</span>
+          <span class="skill-pill">Docker</span>
+          <span class="skill-pill">Bash Script</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">// Dev &amp; Tools</div>
+        <div class="skill-list">
+          <span class="skill-pill">C / C++</span>
+          <span class="skill-pill">Java</span>
+          <span class="skill-pill">Embedded C</span>
+          <span class="skill-pill">Oracle 12C</span>
+          <span class="skill-pill">MySQL</span>
+          <span class="skill-pill">Git / GitHub</span>
+          <span class="skill-pill">Nagios</span>
+          <span class="skill-pill">DevOps (Basic)</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">Credentials</div>
+      <h2>Certifications</h2>
+    </div>
+    <div class="cert-list">
+      <div class="cert-item">
+        <div class="cert-icon">HW</div>
+        <div><div class="cert-name">HCIA-DataCom Certified</div><div class="cert-by">Huawei · 2025–2028</div></div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">CS</div>
+        <div><div class="cert-name">CCNA: Introduction to Networks</div><div class="cert-by">Cisco</div></div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">CS</div>
+        <div><div class="cert-name">CCNA: Switching, Routing &amp; Wireless Essentials</div><div class="cert-by">Cisco</div></div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">AW</div>
+        <div><div class="cert-name">AWS Cloud Technical Essentials</div><div class="cert-by">Amazon Web Services</div></div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">FT</div>
+        <div><div class="cert-name">Fortinet Certified Associate — Cybersecurity</div><div class="cert-by">Fortinet · 2024</div></div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">RH</div>
+        <div><div class="cert-name">Fundamentals of Red Hat Enterprise Linux</div><div class="cert-by">Coursera / Red Hat</div></div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">HP</div>
+        <div><div class="cert-name">Accredited SD-WAN Professional Assessment (AASP)</div><div class="cert-by">HPE</div></div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">AP</div>
+        <div><div class="cert-name">Aruba Product Specialist — Assessment (Central)</div><div class="cert-by">HPE Aruba</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">Academic Background</div>
+      <h2>Education</h2>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-year">2022 – 2026</div>
+        <div class="edu-degree">BSc (Hons) in Information Technology</div>
+        <div class="edu-school">Specializing in Computer Systems &amp; Network Engineering<br>Sri Lanka Institute of Information Technology (SLIIT)</div>
+        <div class="edu-cgpa">CGPA: 3.02 — Year 4 Semester 1</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-year">2018 – 2021</div>
+        <div class="edu-degree">G.C.E Advanced Level — Physical Science</div>
+        <div class="edu-school">BT/Methodist Central College<br>Batticaloa</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-year">2011 – 2018</div>
+        <div class="edu-degree">G.C.E Ordinary Level</div>
+        <div class="edu-school">BT/Methodist Central College<br>Batticaloa</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-tag" style="justify-content:center">Get In Touch</div>
+    <h2>Contact</h2>
+    <p style="color:var(--text-dim);margin-top:1rem;font-size:.95rem;">Open to opportunities in network engineering, security, and cloud infrastructure.</p>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-card-label">// Email</div>
+        <div class="contact-card-val"><a href="mailto:sharvajen1130@gmail.com">sharvajen1130@gmail.com</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-label">// Phone</div>
+        <div class="contact-card-val"><a href="tel:+94755598777">+94 755 598 777</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-label">// GitHub</div>
+        <div class="contact-card-val"><a href="https://github.com/Sharvajen03" target="_blank">Sharvajen03</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-label">// LinkedIn</div>
+        <div class="contact-card-val"><a href="https://linkedin.com/in/sharvajen-sujitharan" target="_blank">Sharvajen Sujitharan</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025 Sujitharan Sharvajan</span>
+  <span>Network &amp; Security Engineer · SLIIT · Sri Lanka</span>
+</footer>
+
+<script>
+  // Intersection observer for scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.proj-card, .cert-item, .skill-group, .edu-card, .exp-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
